@@ -43,5 +43,13 @@ pipeline {
       }
     }
 
+  stage('Deploy') {
+    when {branch 'master'}
+    steps {
+      sshagent (credentials:['ubuntu']) {
+        sh 'ssh -o StrictHostKeyChecking=no ubuntu@34.78.243.189 docker stop ca-project 2> /dev/null || true && docker run --rm -p80:5000 -d --name ca-project clemme/ca-project:latest'
+        }
+    }
+  }
   }
 }
