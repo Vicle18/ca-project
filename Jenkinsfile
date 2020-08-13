@@ -34,9 +34,9 @@ pipeline {
 
           }
           steps {
-            unstash 'source'
             sh '-r ca-project.zip .'
             archiveArtifacts 'ca-project.zip'
+            unstash 'source'
           }
         }
 
