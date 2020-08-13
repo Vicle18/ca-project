@@ -29,7 +29,10 @@ pipeline {
           agent any
           steps {
             sh 'tar --exclude=\'.git/*\' -zcvf /tmp/ca-project.tar.gz .'
-            archiveArtifacts '/tmp/ca-project.tar.gz'
+            dir(path: '/tmp') {
+              archiveArtifacts 'ca-project.tar.gz'
+            }
+
           }
         }
 
