@@ -14,9 +14,10 @@ pipeline {
       }
     }
 
-    stage('docker image') {
+    stage('create artifacts') {
+      when{branch 'master'}
       parallel {
-        stage('docker image') {
+        stage('dockerize') {
           environment {
             DockerOrg = 'clemme/'
             DockerRepo = 'ca-project'
@@ -27,7 +28,7 @@ pipeline {
           }
         }
 
-        stage('create artifact') {
+        stage('create tar') {
           agent any
           steps {
             unstash 'source'
