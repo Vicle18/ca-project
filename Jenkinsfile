@@ -9,6 +9,7 @@ pipeline {
 
       }
       steps {
+        stash 'source'
         sh 'pip install -r requirements.txt && python tests.py'
       }
     }
@@ -21,6 +22,7 @@ pipeline {
             DockerRepo = 'ca-project'
           }
           steps {
+            unstash 'source'
             sh 'jenkinsScripts/createDockerImage.sh'
           }
         }
@@ -28,6 +30,7 @@ pipeline {
         stage('create artifact') {
           agent any
           steps {
+            unstash 'source'
             sh 'tar --exclude=\'.git/*\' -zcvf /tmp/ca-project.tar.gz .'
             dir(path: '/tmp') {
               archiveArtifacts 'ca-project.tar.gz'
