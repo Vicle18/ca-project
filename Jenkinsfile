@@ -10,7 +10,6 @@ pipeline {
       }
       steps {
         sh 'pip install -r requirements.txt && python tests.py'
-        stash(name: 'source', excludes: '.git')
       }
     }
 
@@ -34,9 +33,8 @@ pipeline {
 
           }
           steps {
-            sh '-r ca-project.zip .'
-            archiveArtifacts 'ca-project.zip'
-            unstash 'source'
+            sh 'tar --exclude=\'.git/*\' -zcvf /tmp/ca-project.tar.gz .'
+            archiveArtifacts '/tmp/ca-project.tar.gz'
           }
         }
 
