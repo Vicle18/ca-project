@@ -19,7 +19,7 @@ pipeline {
         DockerRepo = 'ca-project'
       }
       steps {
-        sh 'ls && jenkinsScripts/createDockerImage.sh'
+        sh 'cat jenkinsScripts/createDockerImage.sh && jenkinsScripts/createDockerImage.sh'
       }
     }
 
