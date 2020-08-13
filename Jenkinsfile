@@ -32,7 +32,7 @@ pipeline {
           agent any
           steps {
             unstash 'source'
-            sh 'tar --exclude=\'.git/*\' --exclude=Dockerfile --exclude=Jenkinsfile --exclude=tests.py --exclude=README.md --exclude=.gitignore --exclude=CONTRIBUTING.md --exclude=\'docs/*\' --exclude=\'jenkinsScripts/*\' -zcvf /tmp/ca-project.tar.gz .'
+            sh 'tar --exclude=.git --exclude=.dockerignore --exclude=VERSION --exclude=jenkinsScripts --exclude=docs --exclude=Dockerfile --exclude=Jenkinsfile --exclude=tests.py --exclude=README.md --exclude=.gitignore --exclude=CONTRIBUTING.md -zcvf /tmp/ca-project.tar.gz .'
             dir(path: '/tmp') {
               archiveArtifacts 'ca-project.tar.gz'
             }
