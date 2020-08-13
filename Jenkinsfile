@@ -28,7 +28,7 @@ pipeline {
         stage('create artifact') {
           agent any
           steps {
-            sh 'tar -zcvf ca-project.tar.gz --exclude=\'.git/*\' .'
+            sh 'tar -zcvf ca-project.tar.gz --exclude=\'.git/*\' --warning=no-file-changed .'
             archiveArtifacts 'ca-project.tar.gz'
           }
         }
