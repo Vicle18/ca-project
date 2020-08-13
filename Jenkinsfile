@@ -14,11 +14,11 @@ pipeline {
 
     stage('docker image') {
       environment {
-        DockerOrg = 'clemme'
+        DockerOrg = 'clemme/'
         DockerRepo = 'ca-project'
       }
       steps {
-        sh 'docker --version && jenkinsScripts/createDockerImage.sh'
+        sh 'jenkinsScripts/createDockerImage.sh'
       }
     }
 
