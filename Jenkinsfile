@@ -12,5 +12,12 @@ pipeline {
       }
     }
 
+    stage('docker image') {
+      agent any
+      steps {
+        sh './jenkinsScripts/createDockerImage.sh'
+      }
+    }
+
   }
 }
