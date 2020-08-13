@@ -28,8 +28,8 @@ pipeline {
         stage('create artifact') {
           agent any
           steps {
-            sh 'zip -r ca-project.zip .'
-            archiveArtifacts 'ca-project.zip'
+            sh 'tar -zcvf ca-project.tar.gz .'
+            archiveArtifacts 'ca-project.tar.gz'
           }
         }
 
