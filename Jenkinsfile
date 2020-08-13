@@ -47,7 +47,7 @@ pipeline {
     when {branch 'master'}
     steps {
       sshagent (credentials:['ubuntu']) {
-        sh 'ssh -o StrictHostKeyChecking=no ubuntu@104.199.93.236 "docker stop ca-project 2> /dev/null || true && docker run --rm -p 80:5000 -d --name ca-project clemme/ca-project:latest"'
+        sh 'ssh -o StrictHostKeyChecking=no ubuntu@104.199.93.236 "docker stop ca-project 2> /dev/null || true && docker pull clemme/ca-project:latest && docker run --rm -p 80:5000 -d --name ca-project clemme/ca-project:latest"'
         }
     }
   }
