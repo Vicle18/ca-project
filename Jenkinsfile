@@ -26,12 +26,7 @@ pipeline {
         }
 
         stage('create artifact') {
-          agent {
-            docker {
-              image 'kramos/alpine-zip'
-            }
-
-          }
+          agent any
           steps {
             sh 'tar --exclude=\'.git/*\' -zcvf /tmp/ca-project.tar.gz .'
             archiveArtifacts '/tmp/ca-project.tar.gz'
