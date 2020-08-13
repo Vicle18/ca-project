@@ -10,6 +10,7 @@ pipeline {
       }
       steps {
         sh 'pip install -r requirements.txt && python tests.py'
+        stash(name: 'source', excludes: '.git')
       }
     }
 
@@ -26,10 +27,16 @@ pipeline {
         }
 
         stage('create artifact') {
-          agent any
+          agent {
+            docker {
+              image 'kramos/alpine-zip'
+            }
+
+          }
           steps {
-            sh 'tar --exclude=\'.git/*\' --exclude=\'ca-project.tar.gz\' -zcvf ca-project.tar.gz .'
-            archiveArtifacts 'ca-project.tar.gz'
+            unstash 'source'
+            sh '-r ca-project.zip .'
+            archiveArtifacts 'ca-project.zip'
           }
         }
 
