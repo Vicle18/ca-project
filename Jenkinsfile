@@ -14,6 +14,10 @@ pipeline {
 
     stage('docker image') {
       agent any
+      environment {
+        DockerOrg = 'clemme'
+        DockerRepo = 'ca-project'
+      }
       steps {
         sh './jenkinsScripts/createDockerImage.sh'
       }
