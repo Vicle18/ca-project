@@ -13,7 +13,12 @@ pipeline {
     }
 
     stage('docker image') {
-      agent any
+      agent {
+        node {
+          label 'master-label'
+        }
+
+      }
       environment {
         DockerOrg = 'clemme'
         DockerRepo = 'ca-project'
